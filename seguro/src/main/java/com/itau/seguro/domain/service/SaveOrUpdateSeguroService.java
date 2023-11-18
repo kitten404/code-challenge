@@ -2,6 +2,7 @@ package com.itau.seguro.domain.service;
 
 import com.itau.seguro.domain.exception.PersistenceException;
 import com.itau.seguro.domain.model.SeguroModel;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class SaveOrUpdateSeguroService {
       var fee = calculateFeeService.calculateFee(seguro.getCategoria(), seguro.getPrecoBase());
 
       seguro.setPrecoTarifado(seguro.getPrecoBase() + fee);
+      seguro.setId(UUID.randomUUID());
       var savedSeguro = writeSeguroService.saveSeguro(seguro);
       log.info("m=saveSeguro msg=Final de salvar ou atualizar: {}", model);
       return savedSeguro;

@@ -6,7 +6,8 @@ spring:
     password: SeguroService321
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
+      dialect: org.hibernate.dialect.SQLServerDialect
 
 management:
   tracing:

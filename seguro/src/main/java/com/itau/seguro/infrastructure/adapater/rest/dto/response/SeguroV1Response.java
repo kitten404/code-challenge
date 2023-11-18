@@ -2,7 +2,7 @@ package com.itau.seguro.infrastructure.adapater.rest.dto.response;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.itau.seguro.domain.model.enums.CategoriaEnum;
+import com.itau.seguro.infrastructure.adapater.rest.dto.enums.CategoriaDtoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.Data;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class SeguroV1Response {
   private String nome;
-  private CategoriaEnum categoria;
-  private Double precoBase;
-  private Double precoTarifado;
+  private CategoriaDtoEnum categoria;
+  private double precoBase;
+  private double precoTarifado;
 }

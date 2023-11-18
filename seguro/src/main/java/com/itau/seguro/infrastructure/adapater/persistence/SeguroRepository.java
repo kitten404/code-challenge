@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface SeguroRepository extends JpaRepository<SeguroEntity, UUID> {
   SeguroEntity save(SeguroEntity entity);
 
-  SeguroEntity findByNameAndCategoriaAndPrecoBase(
+  SeguroEntity findByNomeAndCategoriaAndPrecoBase(
       String name, CategoriaEntityEnum categoria, Double precoBase);
 }

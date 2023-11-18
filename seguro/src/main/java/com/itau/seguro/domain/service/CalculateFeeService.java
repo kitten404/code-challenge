@@ -3,6 +3,7 @@ package com.itau.seguro.domain.service;
 import static com.itau.seguro.application.utils.MetricUtils.calculoTaxaInsucesso;
 import static com.itau.seguro.application.utils.MetricUtils.calculoTaxaSucesso;
 import static com.itau.seguro.domain.service.strategy.mapping.FeeCalculatorMapping.feeCalculator;
+import static com.itau.seguro.domain.utils.MathUtils.doubleFormatter;
 
 import com.itau.seguro.domain.exception.CalculateFeeException;
 import com.itau.seguro.domain.model.enums.CategoriaEnum;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 @Slf4j
 public class CalculateFeeService {
-  public Double calculateFee(CategoriaEnum categoria, Double precoBase) {
+  public double calculateFee(CategoriaEnum categoria, double precoBase) {
     try {
       var fee =
           feeCalculator
@@ -24,7 +25,7 @@ public class CalculateFeeService {
                     throw new IllegalArgumentException("Categoria nao mapeada para strategy");
                   })
               .get();
-      var result = fee.calculate(precoBase);
+      var result = doubleFormatter(fee.calculate(precoBase));
       log.info(
           "m=calculateFee msg=Calculo de tarifa para categoria: {} e preco base: {} = {}",
           categoria.name(),

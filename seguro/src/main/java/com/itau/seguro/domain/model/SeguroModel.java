@@ -15,6 +15,6 @@ public class SeguroModel {
   private UUID id;
   private String nome;
   private CategoriaEnum categoria;
-  private Double precoBase;
-  private Double precoTarifado;
+  private double precoBase;
+  private double precoTarifado;
 }

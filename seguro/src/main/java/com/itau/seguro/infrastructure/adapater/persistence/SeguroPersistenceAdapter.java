@@ -10,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-@AllArgsConstructor
 @Component
+@AllArgsConstructor
 @Slf4j
 public class SeguroPersistenceAdapter implements SeguroPersistencePort {
   private SeguroRepository seguroRepository;
@@ -35,7 +35,7 @@ public class SeguroPersistenceAdapter implements SeguroPersistencePort {
         categoria.name(),
         precoBase);
     var seguroEntity =
-        seguroRepository.findByNameAndCategoriaAndPrecoBase(
+        seguroRepository.findByNomeAndCategoriaAndPrecoBase(
             nome, CategoriaEntityEnum.valueOf(categoria.name()), precoBase);
     if (seguroEntity != null) {
       var savedSeguro = modelMapper.map(seguroEntity, SeguroModel.class);
