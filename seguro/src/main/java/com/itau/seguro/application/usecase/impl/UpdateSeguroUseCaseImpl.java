@@ -1,5 +1,8 @@
 package com.itau.seguro.application.usecase.impl;
 
+import static com.itau.seguro.application.utils.MetricUtils.updateSeguroInsucesso;
+import static com.itau.seguro.application.utils.MetricUtils.updateSeguroSucesso;
+
 import com.itau.seguro.application.usecase.UpdateSeguroUseCase;
 import com.itau.seguro.domain.model.SeguroModel;
 import com.itau.seguro.domain.service.SaveOrUpdateSeguroService;
@@ -19,12 +22,14 @@ public class UpdateSeguroUseCaseImpl implements UpdateSeguroUseCase {
       log.info("m=UpdateSeguroUseCaseImpl.execute msg=Início de atualização de seguro {}", model);
       var savedSeguro = saveOrUpdateSeguroService.saveOrUpdateSeguro(model);
       log.info("m=UpdateSeguroUseCaseImpl.execute msg=Final de atualização de seguro: {}", model);
+      updateSeguroSucesso().increment();
       return savedSeguro;
     } catch (Exception e) {
       log.error(
           "m=UpdateSeguroUseCaseImpl.execute msg=Erro ao processar atualizacao de seguro: {}, error: {}",
           model,
           e.getMessage());
+      updateSeguroInsucesso().increment();
       throw e;
     }
   }

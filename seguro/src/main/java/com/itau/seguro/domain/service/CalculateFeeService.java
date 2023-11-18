@@ -1,5 +1,7 @@
 package com.itau.seguro.domain.service;
 
+import static com.itau.seguro.application.utils.MetricUtils.calculoTaxaInsucesso;
+import static com.itau.seguro.application.utils.MetricUtils.calculoTaxaSucesso;
 import static com.itau.seguro.domain.service.strategy.mapping.FeeCalculatorMapping.feeCalculator;
 
 import com.itau.seguro.domain.exception.CalculateFeeException;
@@ -28,6 +30,7 @@ public class CalculateFeeService {
           categoria.name(),
           precoBase,
           result);
+      calculoTaxaSucesso().increment();
 
       return result;
     } catch (Exception e) {
@@ -36,6 +39,7 @@ public class CalculateFeeService {
           categoria.name(),
           precoBase,
           e.getMessage());
+      calculoTaxaInsucesso().increment();
       throw new CalculateFeeException("Erro a calcular tatifa " + e);
     }
   }

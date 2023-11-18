@@ -34,7 +34,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.h2database:h2'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation "org.modelmapper:modelmapper:$MODEL_MAPPER"
 	implementation "com.microsoft.sqlserver:mssql-jdbc:$JDBC_DRIVER_VERSION"
 	implementation "io.micrometer:micrometer-registry-prometheus:$MICROMETER_METRIC_VERSION"
