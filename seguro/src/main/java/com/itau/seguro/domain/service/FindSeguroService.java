@@ -1,5 +1,6 @@
 package com.itau.seguro.domain.service;
 
+import com.itau.seguro.domain.exception.PersistenceException;
 import com.itau.seguro.domain.model.SeguroModel;
 import com.itau.seguro.domain.model.enums.CategoriaEnum;
 import com.itau.seguro.domain.port.persistence.SeguroPersistencePort;
@@ -35,7 +36,7 @@ public class FindSeguroService {
           categoria.name(),
           precoBase,
           e.getMessage());
-      throw e;
+      throw new PersistenceException("Erro ao encontrar seguro " + e);
     }
   }
 }

@@ -1,5 +1,6 @@
 package com.itau.seguro.domain.service;
 
+import com.itau.seguro.domain.exception.PersistenceException;
 import com.itau.seguro.domain.model.SeguroModel;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ public class SaveOrUpdateSeguroService {
       return savedSeguro;
     } catch (Exception e) {
       log.error("m=saveSeguro msg=Erro ao salvar seguro :{}, error: ", model, e.getMessage());
-      throw e;
+      throw new PersistenceException("Erro ao salvar ou atualizar seguro " + e);
     }
   }
 }

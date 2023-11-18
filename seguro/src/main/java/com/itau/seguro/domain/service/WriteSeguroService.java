@@ -21,7 +21,7 @@ public class WriteSeguroService {
       return savedSeguro;
     } catch (Exception e) {
       log.error("m=saveSeguro msg=Erro ao salvar seguro: {}, error: {}", model, e.getMessage());
-      throw new PersistenceException();
+      throw new PersistenceException("Erro ao salvar seguro " + e);
     }
   }
 }

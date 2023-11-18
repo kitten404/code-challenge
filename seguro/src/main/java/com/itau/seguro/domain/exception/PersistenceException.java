@@ -1,11 +1,11 @@
 package com.itau.seguro.domain.exception;
 
-public class PersistenceException extends RuntimeException {
-  public PersistenceException(String msg) {
-    super(msg);
-  }
+import static com.itau.seguro.domain.model.error.enums.DomainExceptionTypeEnum.PERSISTENCE_EXCEPTION;
 
-  public PersistenceException() {
-    super();
+import com.itau.seguro.domain.model.error.DomainError;
+
+public class PersistenceException extends DomainError {
+  public PersistenceException(String msg) {
+    super(PERSISTENCE_EXCEPTION, msg);
   }
 }

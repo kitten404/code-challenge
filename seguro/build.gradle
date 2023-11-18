@@ -11,6 +11,8 @@ version = '0.0.1-SNAPSHOT'
 ext {
 	MODEL_MAPPER = '3.2.0'
 	JDBC_DRIVER_VERSION = '12.4.2.jre11'
+	MICROMETER_METRIC_VERSION = '1.12.0'
+	MICROMETER_TRACING_VERSION = '1.2.0'
 }
 
 java {
@@ -35,6 +37,8 @@ dependencies {
 	implementation 'com.h2database:h2'
 	implementation "org.modelmapper:modelmapper:$MODEL_MAPPER"
 	implementation "com.microsoft.sqlserver:mssql-jdbc:$JDBC_DRIVER_VERSION"
+	implementation "io.micrometer:micrometer-registry-prometheus:$MICROMETER_METRIC_VERSION"
+	implementation "io.micrometer:micrometer-tracing-bridge-brave:$MICROMETER_TRACING_VERSION"
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
