@@ -17,8 +17,10 @@ public class SeguroEntity {
   @Id private String id;
   private String nome;
   private String categoria;
+
   @Column(name = "preco_base")
   private double precoBase;
+
   @Column(name = "preco_tarifado")
   private double precoTarifado;
 }

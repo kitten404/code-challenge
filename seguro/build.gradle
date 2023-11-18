@@ -10,6 +10,7 @@ version = '0.0.1-SNAPSHOT'
 
 ext {
 	MODEL_MAPPER = '3.2.0'
+	JDBC_DRIVER_VERSION = '12.4.2.jre11'
 }
 
 java {
@@ -33,6 +34,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.h2database:h2'
 	implementation "org.modelmapper:modelmapper:$MODEL_MAPPER"
+	implementation "com.microsoft.sqlserver:mssql-jdbc:$JDBC_DRIVER_VERSION"
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

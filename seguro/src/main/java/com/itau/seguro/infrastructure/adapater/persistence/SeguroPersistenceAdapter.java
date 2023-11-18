@@ -27,11 +27,12 @@ public class SeguroPersistenceAdapter implements SeguroPersistencePort {
   }
 
   @Override
-  public SeguroModel findByNameAndCategoriaAndPrecoBase(String name, CategoriaEnum categoria, Double precoBase) {
-    var seguroEntity = seguroRepository.findByNameAndCategoriaAndPrecoBase(name,
-            CategoriaEntityEnum.valueOf(categoria.name()),
-            precoBase);
-    if(seguroEntity != null) {
+  public SeguroModel findByNameAndCategoriaAndPrecoBase(
+      String name, CategoriaEnum categoria, Double precoBase) {
+    var seguroEntity =
+        seguroRepository.findByNameAndCategoriaAndPrecoBase(
+            name, CategoriaEntityEnum.valueOf(categoria.name()), precoBase);
+    if (seguroEntity != null) {
       return modelMapper.map(seguroEntity, SeguroModel.class);
     }
     return null;
