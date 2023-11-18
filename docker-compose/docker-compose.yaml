@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: SeguroService321
+      ACCEPT_EULA: Y
+    ports:
+      - "1433:1433"
+    networks:
+      - seguro_network
+    container_name: sql_server_container
+    restart: always
+
+networks:
+  seguro_network:
+    driver: bridge
+
+volumes:
+  sql-data:
+    driver: local
