@@ -16,8 +16,15 @@ public class UpdateSeguroUseCaseImpl implements UpdateSeguroUseCase {
   @Override
   public SeguroModel execute(SeguroModel model) {
     try {
-      return saveOrUpdateSeguroService.saveSeguro(model);
+      log.info("m=UpdateSeguroUseCaseImpl.execute msg=Início de atualização de seguro {}", model);
+      var savedSeguro = saveOrUpdateSeguroService.saveOrUpdateSeguro(model);
+      log.info("m=UpdateSeguroUseCaseImpl.execute msg=Final de atualização de seguro: {}", model);
+      return savedSeguro;
     } catch (Exception e) {
+      log.error(
+          "m=UpdateSeguroUseCaseImpl.execute msg=Erro ao processar atualizacao de seguro: {}, error: {}",
+          model,
+          e.getMessage());
       throw e;
     }
   }

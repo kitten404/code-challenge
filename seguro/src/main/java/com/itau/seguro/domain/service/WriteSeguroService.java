@@ -13,11 +13,14 @@ import org.springframework.stereotype.Service;
 public class WriteSeguroService {
   private SeguroPersistencePort seguroPersistence;
 
-  public SeguroModel execute(SeguroModel model) {
+  public SeguroModel saveSeguro(SeguroModel model) {
     try {
-      return seguroPersistence.save(model);
+      log.info("m=saveSeguro msg=Início de salvar seguro: {}", model);
+      var savedSeguro = seguroPersistence.save(model);
+      log.info("m=saveSeguro msg=Final de salvar seguro: {}", model);
+      return savedSeguro;
     } catch (Exception e) {
-      log.error("m=WriteSeguroService.write msg=Nao foi possivel salvar seguro", e.getMessage());
+      log.error("m=saveSeguro msg=Erro ao salvar seguro: {}, error: {}", model, e.getMessage());
       throw new PersistenceException();
     }
   }

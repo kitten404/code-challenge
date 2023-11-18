@@ -13,8 +13,9 @@ public class SaveOrUpdateSeguroService {
   private WriteSeguroService writeSeguroService;
   private CalculateFeeService calculateFeeService;
 
-  public SeguroModel saveSeguro(SeguroModel model) {
+  public SeguroModel saveOrUpdateSeguro(SeguroModel model) {
     try {
+      log.info("m=saveSeguro msg=Início de salvar ou atualizar seguro: {}", model);
       var seguro =
           findSeguroService.findSeguro(model.getNome(), model.getCategoria(), model.getPrecoBase());
       if (seguro == null) {
@@ -23,9 +24,11 @@ public class SaveOrUpdateSeguroService {
       var fee = calculateFeeService.calculateFee(seguro.getCategoria(), seguro.getPrecoBase());
 
       seguro.setPrecoTarifado(seguro.getPrecoBase() + fee);
-      return writeSeguroService.execute(seguro);
+      var savedSeguro = writeSeguroService.saveSeguro(seguro);
+      log.info("m=saveSeguro msg=Final de salvar ou atualizar: {}", model);
+      return savedSeguro;
     } catch (Exception e) {
-      log.error("Nao foi possível salvar seguro: ", e.getMessage());
+      log.error("m=saveSeguro msg=Erro ao salvar seguro :{}, error: ", model, e.getMessage());
       throw e;
     }
   }

@@ -15,8 +15,26 @@ public class FindSeguroService {
 
   public SeguroModel findSeguro(String nome, CategoriaEnum categoria, Double precoBase) {
     try {
-      return persistencePort.findByNameAndCategoriaAndPrecoBase(nome, categoria, precoBase);
+      log.info(
+          "m=findSeguro msg=Iníco de encontrar seguro com nome: {}, categoria: {}, and preço base: {}",
+          nome,
+          categoria.name(),
+          precoBase);
+      var savedSeguro =
+          persistencePort.findByNameAndCategoriaAndPrecoBase(nome, categoria, precoBase);
+      log.info(
+          "m=findSeguro msg=Final de encontrar seguro com nome: {}, categoria: {}, and preço base: {}",
+          nome,
+          categoria.name(),
+          precoBase);
+      return savedSeguro;
     } catch (Exception e) {
+      log.error(
+          "m=findSeguro msg=Erro ao encontrar seguro com nome: {}, categoria: {}, and preço: {}, error: {}",
+          nome,
+          categoria.name(),
+          precoBase,
+          e.getMessage());
       throw e;
     }
   }

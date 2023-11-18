@@ -12,14 +12,30 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class CalculateFeeService {
   public Double calculateFee(CategoriaEnum categoria, Double precoBase) {
-    var fee =
-        feeCalculator
-            .getOrDefault(
-                categoria,
-                () -> {
-                  throw new IllegalArgumentException("Categoria nao mapeada para strategy");
-                })
-            .get();
-    return fee.calculate(precoBase);
+    try {
+      var fee =
+          feeCalculator
+              .getOrDefault(
+                  categoria,
+                  () -> {
+                    throw new IllegalArgumentException("Categoria nao mapeada para strategy");
+                  })
+              .get();
+      var result = fee.calculate(precoBase);
+      log.info(
+          "m=calculateFee msg=Calculo de tarifa para categoria: {} e preco base: {} = {}",
+          categoria.name(),
+          precoBase,
+          result);
+
+      return result;
+    } catch (Exception e) {
+      log.error(
+          "m=calculateFee msg=Erro no calcula de tarifa para categoria: {} e preco base: {}, error: {}",
+          categoria.name(),
+          precoBase,
+          e.getMessage());
+      throw e;
+    }
   }
 }

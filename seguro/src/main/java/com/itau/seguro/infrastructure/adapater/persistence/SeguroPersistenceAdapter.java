@@ -19,21 +19,32 @@ public class SeguroPersistenceAdapter implements SeguroPersistencePort {
 
   @Override
   public SeguroModel save(SeguroModel model) {
+    log.info("m=save msg=Início de save adapter seguro: {}", model);
     var seguroEntity = modelMapper.map(model, SeguroEntity.class);
-    if (seguroEntity != null) {
-      return modelMapper.map(seguroRepository.save(seguroEntity), SeguroModel.class);
-    }
-    return null;
+    var savedObj = modelMapper.map(seguroRepository.save(seguroEntity), SeguroModel.class);
+    log.info("m=save msg=Final de save adapter seguro: {}", model);
+    return savedObj;
   }
 
   @Override
   public SeguroModel findByNameAndCategoriaAndPrecoBase(
-      String name, CategoriaEnum categoria, Double precoBase) {
+      String nome, CategoriaEnum categoria, Double precoBase) {
+    log.info(
+        "m=findByNameAndCategoriaAndPrecoBase msg=Início de encontrar seguro por nome: {}, categoria: {} e preço base: {}",
+        nome,
+        categoria.name(),
+        precoBase);
     var seguroEntity =
         seguroRepository.findByNameAndCategoriaAndPrecoBase(
-            name, CategoriaEntityEnum.valueOf(categoria.name()), precoBase);
+            nome, CategoriaEntityEnum.valueOf(categoria.name()), precoBase);
     if (seguroEntity != null) {
-      return modelMapper.map(seguroEntity, SeguroModel.class);
+      var savedSeguro = modelMapper.map(seguroEntity, SeguroModel.class);
+      log.info(
+          "m=findByNameAndCategoriaAndPrecoBase msg=Final de encontrar seguro por nome: {}, categoria: {} e preço base: {}",
+          nome,
+          categoria.name(),
+          precoBase);
+      return savedSeguro;
     }
     return null;
   }
