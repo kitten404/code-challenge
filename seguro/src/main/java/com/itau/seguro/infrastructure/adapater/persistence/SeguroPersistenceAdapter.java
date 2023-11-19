@@ -22,7 +22,7 @@ public class SeguroPersistenceAdapter implements SeguroPersistencePort {
   public SeguroModel save(SeguroModel model) {
     log.info("m=save msg=Início de save adapter seguro: {}", model);
     var seguroEntity = modelMapper.map(model, SeguroEntity.class);
-    seguroEntity.setId(UUID.randomUUID());
+    seguroEntity.setId((seguroEntity.getId() != null ? seguroEntity.getId() : UUID.randomUUID()));
     var savedObj = modelMapper.map(seguroRepository.save(seguroEntity), SeguroModel.class);
     log.info("m=save msg=Final de save adapter seguro: {}", model);
     return savedObj;

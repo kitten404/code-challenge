@@ -29,6 +29,7 @@
 --> Usei o @Valid e Jakarta para validar se campos forem nulos, vazios e ou zerados, isso não foi mencionado no enunciado, mas decidi colocar para manter a consistências dos dados de entrada
 3. Banco de dados </br>
 --> Optei pro SQL Server por ser um banco de dados que me familiarizo mais, porém poderia ser algum banco NoSQL dependendo do contexto da aplicaçao, como é uma aplicação simples, uma tabela ia atender perfeitamente
+--> O registro é primeiro verificado se já existe no banco de dados para depois acontecer a criação do mesmo
 4. Cálculo de tarifa </br>
 --> Utilizei o padrão de projeto strategy para o cálculo das tarifas, como são muitos calculos diferentes num mesmo segmento esse padrão atende e se surgir mais um tipo de cálculo a extensão é aplicada ao invés da modificação, respeitando o principio OCP do solid
 5. Testes </br>
