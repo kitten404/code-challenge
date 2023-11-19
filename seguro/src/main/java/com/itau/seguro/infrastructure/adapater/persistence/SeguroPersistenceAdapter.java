@@ -5,6 +5,7 @@ import com.itau.seguro.domain.model.enums.CategoriaEnum;
 import com.itau.seguro.domain.port.persistence.SeguroPersistencePort;
 import com.itau.seguro.infrastructure.adapater.persistence.entity.SeguroEntity;
 import com.itau.seguro.infrastructure.adapater.persistence.entity.enums.CategoriaEntityEnum;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -21,6 +22,7 @@ public class SeguroPersistenceAdapter implements SeguroPersistencePort {
   public SeguroModel save(SeguroModel model) {
     log.info("m=save msg=Início de save adapter seguro: {}", model);
     var seguroEntity = modelMapper.map(model, SeguroEntity.class);
+    seguroEntity.setId(UUID.randomUUID());
     var savedObj = modelMapper.map(seguroRepository.save(seguroEntity), SeguroModel.class);
     log.info("m=save msg=Final de save adapter seguro: {}", model);
     return savedObj;

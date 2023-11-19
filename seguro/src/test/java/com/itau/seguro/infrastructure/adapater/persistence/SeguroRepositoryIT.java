@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.itau.seguro.IntegrationTests;
 import com.itau.seguro.infrastructure.adapater.persistence.entity.enums.CategoriaEntityEnum;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+@Transactional
 class SeguroRepositoryIT extends IntegrationTests {
   @Autowired private SeguroRepository seguroRepository;
   @Autowired private TestEntityManager entityManager;

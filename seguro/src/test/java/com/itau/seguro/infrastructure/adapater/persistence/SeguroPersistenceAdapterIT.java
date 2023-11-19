@@ -7,12 +7,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.itau.seguro.IntegrationTests;
 import com.itau.seguro.domain.model.enums.CategoriaEnum;
 import com.itau.seguro.infrastructure.adapater.persistence.entity.SeguroEntity;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+@Transactional
 class SeguroPersistenceAdapterIT extends IntegrationTests {
 
   private SeguroPersistenceAdapter seguroPersistenceAdapter;

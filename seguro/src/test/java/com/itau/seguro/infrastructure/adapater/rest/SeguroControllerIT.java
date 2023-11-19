@@ -8,12 +8,13 @@ import com.itau.seguro.infrastructure.adapater.persistence.SeguroRepository;
 import com.itau.seguro.infrastructure.adapater.rest.dto.response.SeguroV1Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.web.client.RestTemplate;
 
 class SeguroControllerIT extends IntegrationTests {
-  private SeguroRepository seguroRepository;
-  private RestTemplate restTemplate;
+  @Autowired private SeguroRepository seguroRepository;
+  @Autowired private TestRestTemplate restTemplate;
 
   private String baseUri;
 
@@ -21,7 +22,6 @@ class SeguroControllerIT extends IntegrationTests {
 
   @BeforeEach
   public void setUp() {
-    restTemplate = new RestTemplate();
     baseUri = "http://localhost:" + PORT;
   }
 
@@ -32,7 +32,7 @@ class SeguroControllerIT extends IntegrationTests {
     var response =
         restTemplate.postForEntity(baseUri + "/v1/seguro", request, SeguroV1Response.class);
 
-    assertEquals(response.getStatusCode(), 200);
+    assertEquals(200, response.getStatusCode().value());
     var salvoSeguro = seguroRepository.findAll();
     assertEquals(1, salvoSeguro.size());
   }
