@@ -1,7 +1,7 @@
 # Code Challenge
 
 ## Instruções para rodar o projeto
-1. Acessa a pasta docker-compose e rode o seguinte comando para subir os containers necessários: <b>docker-compose up -d</b>
+1. Acesse a pasta docker-compose e rode o seguinte comando para subir os containers necessários: <b>docker-compose up -d</b>
 2. Instale o jdk correspondente </br>
   <b> a. Windows:</b> </i> </br>
      --> Faça o download do <a href="https://www.oracle.com/br/java/technologies/downloads/">Java 17</a> </br>
@@ -15,7 +15,7 @@
   curl --location --request POST 'http://localhost:8080/v1/seguros' \
   --header 'Content-Type: application/json' \
   --data-raw '{
-    "nome": "",
+    "nome": "Seguro Vida",
     "categoria" : "AUTO",
     "preco_base": 45.76
   }'

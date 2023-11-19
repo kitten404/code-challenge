@@ -30,7 +30,7 @@ class SeguroControllerIT extends IntegrationTests {
     var request = createSeguroV1RequestMock();
 
     var response =
-        restTemplate.postForEntity(baseUri + "/v1/seguro", request, SeguroV1Response.class);
+        restTemplate.postForEntity(baseUri + "/v1/seguros", request, SeguroV1Response.class);
 
     assertEquals(200, response.getStatusCode().value());
     var salvoSeguro = seguroRepository.findAll();

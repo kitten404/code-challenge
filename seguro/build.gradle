@@ -1,5 +1,6 @@
 plugins {
 	id 'java'
+	id 'jacoco'
 	id 'org.springframework.boot' version '3.2.0-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.1.4'
 	id 'com.diffplug.spotless' version '6.+'
@@ -52,6 +53,39 @@ spotless {
 	}
 }
 
-tasks.named('test') {
+test {
 	useJUnitPlatform()
+	jacoco {
+		excludes = [
+				'**Application',
+				'**/application/configuration/**',
+				'**/application/utils/**',
+				'**/domain/model/**',
+				'**/domain/exception/**',
+				'**/rest/dto/**',
+				'**/rest/dto/request/**',
+				'**/rest/dto/response/**',
+				'**/rest/exception/**',
+				'**/persistence/entity/**'
+		]
+	}
+	finalizedBy jacocoTestCoverageVerification, jacocoTestReport
+}
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.9
+			}
+		}
+	}
+}
+
+jacocoTestReport {
+	reports {
+		xml.required = false
+		csv.required = false
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
 }
