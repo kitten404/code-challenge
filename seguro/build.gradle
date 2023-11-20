@@ -16,6 +16,19 @@ ext {
 	MICROMETER_TRACING_VERSION = '1.2.0'
 }
 
+def testCoverageExc = [
+		'**Application',
+		'**/application/configuration/**',
+		'**/application/utils/**',
+		'**/domain/model/**',
+		'**/domain/exception/**',
+		'**/rest/dto/**',
+		'**/rest/dto/request/**',
+		'**/rest/dto/response/**',
+		'**/rest/exception/**',
+		'**/persistence/entity/**'
+]
+
 java {
 	sourceCompatibility = '17'
 }
@@ -56,21 +69,7 @@ spotless {
 
 test {
 	useJUnitPlatform()
-	jacoco {
-		excludes = [
-				'**Application',
-				'**/application/configuration/**',
-				'**/application/utils/**',
-				'**/domain/model/**',
-				'**/domain/exception/**',
-				'**/rest/dto/**',
-				'**/rest/dto/request/**',
-				'**/rest/dto/response/**',
-				'**/rest/exception/**',
-				'**/persistence/entity/**'
-		]
-	}
-	finalizedBy jacocoTestCoverageVerification, jacocoTestReport
+	finalizedBy jacocoTestReport, jacocoTestCoverageVerification
 }
 
 jacocoTestCoverageVerification {
@@ -81,12 +80,25 @@ jacocoTestCoverageVerification {
 			}
 		}
 	}
+	afterEvaluate {
+		afterEvaluate {
+			classDirectories.setFrom(files(classDirectories.files.collect {
+				fileTree(dir: it, exclude: testCoverageExc)
+			}))
+		}
+	}
 }
 
 jacocoTestReport {
 	reports {
-		xml.required = false
-		csv.required = false
+		xml.required = true
 		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+	afterEvaluate {
+		afterEvaluate {
+			classDirectories.setFrom(files(classDirectories.files.collect {
+				fileTree(dir: it, exclude: testCoverageExc)
+			}))
+		}
 	}
 }
