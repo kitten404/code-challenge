@@ -4,6 +4,7 @@ import com.itau.seguro.application.usecase.UpdateSeguroUseCase;
 import com.itau.seguro.domain.model.SeguroModel;
 import com.itau.seguro.infrastructure.adapater.rest.dto.request.SeguroV1Request;
 import com.itau.seguro.infrastructure.adapater.rest.dto.response.SeguroV1Response;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -21,7 +22,12 @@ public class SeguroController {
   private ModelMapper modelMapper;
 
   @PostMapping
-  public SeguroV1Response updateSeguro(@RequestBody SeguroV1Request request) {
+  public SeguroV1Response updateSeguro(@Valid @RequestBody SeguroV1Request request) {
+    log.info(
+        "m=updateSeguro, msg=Dados de entrada: nome: {}, categoria: {}, preco_base: {}",
+        request.getNome(),
+        request.getCategoria(),
+        request.getPrecoBase());
     var response = updateSeguroUseCase.execute(modelMapper.map(request, SeguroModel.class));
     return modelMapper.map(response, SeguroV1Response.class);
   }

@@ -1,12 +1,15 @@
+server:
+  port: 8080
+
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=itau
-    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=master
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
     password: SeguroService321
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       dialect: org.hibernate.dialect.SQLServerDialect
 
 management:

@@ -13,5 +13,6 @@ public class DomainError extends RuntimeException {
   public DomainError(DomainExceptionTypeEnum errorType, String message) {
     super(message);
     this.errorType = errorType;
+    this.message = message;
   }
 }
